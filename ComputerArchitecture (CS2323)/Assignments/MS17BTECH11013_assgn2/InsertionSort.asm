@@ -341,12 +341,12 @@
 				
 				blt $t1, $zero, exit2ISt3
 				
-				lw $t2, seq2($t1)    #  a[j] 
+				lw $t2, seq1($t1)    #  a[j] 
 				
 				blt $t2, $t6, exit2ISt3
 				
 				addi $t7, $t1, 4 
-				sw $t2, seq2($t7)  # a[j+1] = a[j] 
+				sw $t2, seq1($t7)  # a[j+1] = a[j] 
 				
 				addi $t1, $t1, -4
 				addi $t9, $t9, 1 
@@ -362,7 +362,7 @@
 			bne $t5, $zero, dothisISt3
 			
 			addi $t7, $t1, 4
-			sw $t6 seq2($t7)
+			sw $t6 seq1($t7)
 			
 			addi $t0, $t0, 4 
 			j loop1ISt3
@@ -370,7 +370,7 @@
 			dothisISt3: 
 				addi $t9, $t9, 1 
 				addi $t7, $t1, 4
-				sw $t6 seq2($t7)
+				sw $t6 seq1($t7)
 				
 				addi $t0, $t0, 4 
 				j loop1ISt3		

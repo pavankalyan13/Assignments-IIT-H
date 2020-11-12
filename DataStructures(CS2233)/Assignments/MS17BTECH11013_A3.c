@@ -1,7 +1,7 @@
 /*
-Assignment 2
+Assignment 3
 Roll Number: MS17BTECH11013
-Name: Pavan Kalyan Padigam
+Name: PADIGAM PAVAN KALYAN
 
 */
 #include<stdio.h>
@@ -69,35 +69,36 @@ int main(){
    }
 
 
-   do{ // Ugly do-while to process first request line before first scanf.
+   do{
+       // Ugly do-while to process first request line before first scanf.
 
-     testNode = searchNode(root,numberPlate);
+        testNode = searchNode(root,numberPlate);
 
-     if(choice == 'S'){
+        if(choice == 'S'){
 
        //*** Call your search function here with argument numberPlate ***
 
-      if( testNode != NULL)
-      {
+            if( testNode != NULL)
+            {
           // If the given numberPlate exists in the BST then cout "1 " and print the path
-           printf("1 ");
-           printPath(root, numberPlate);
-           printf("\n");
-      }
-      else
-      {
-          printf("0\n");
-      }
-     }
+                printf("1 ");
+                printPath(root, numberPlate);
+                printf("\n");
+            }
+            else
+            {
+                printf("0\n");
+            }
+        }
      else if(choice == '<'){
        //*** Call your predecessor function here with argument numberPlate ***
-    if(searchNode(root,numberPlate) != NULL)
+    if(testNode != NULL)
     {
         // If the numberPlate does exist in the BST then find the predessor of it
-        if(Predessor(searchNode(root, numberPlate)) != NULL)
+        if(Predessor(testNode) != NULL)
         {
             // if the predessor exists then print
-            printf("%s\n", printPredessor(Predessor(searchNode(root, numberPlate))));
+            printf("%s\n", printPredessor(Predessor(testNode)));
 
         }
         else
@@ -123,13 +124,13 @@ int main(){
      else if(choice == '>'){
        //*** Call your successor function here with argument numberPlate ***
 
-    if(searchNode(root,numberPlate) != NULL)
+    if(testNode != NULL)
     {
         // If the numberPlate does exist in the BST then find the Sucessor of it
-        if(Sucessor(searchNode(root, numberPlate)) != NULL)
+        if(Sucessor(testNode) != NULL)
         {
             // if the Sucessor exists then print
-            printf("%s\n", printSucessor(Sucessor(searchNode(root, numberPlate))));
+            printf("%s\n", printSucessor(Sucessor(testNode)));
 
         }
         else
@@ -152,37 +153,37 @@ int main(){
     }
 
      }
-     else if(choice == '+')
-     {
-         if(searchNode(root,numberPlate) == NULL)
+        else if(choice == '+')
         {
-            root = insertBstNode(root,numberPlate);
-        }
-     }else if(choice == '-')
-     {
-         if(searchNode(root,numberPlate) != NULL)
+            if(testNode == NULL)
+            {
+                root = insertBstNode(root,numberPlate);
+            }
+        }else if(choice == '-')
         {
-            int count = 0;
-            count = nofChildren(searchNode(root, numberPlate));
-            printf("%d ",count);
+            if(testNode != NULL)
+            {
+                int count = 0;
+                count = nofChildren(testNode);
+                printf("%d ",count);
 
-            printReplacement(root, searchNode(root, numberPlate),count);
-            root = deleteNode(root,numberPlate);
-        }
-        else
+                printReplacement(root, testNode,count);
+                root = deleteNode(root,numberPlate);
+            }
+            else
+            {
+                printf("-1\n");
+            }
+        }else if(choice == 'I')
         {
-            printf("-1\n");
-            // printf("\n**********");
-        }
-     }else if(choice == 'I')
-     {
-         InOrderTraversal(root);
-         printf("\n");
+            InOrderTraversal(root);
+            printf("\n");
 
-     }else if(choice == 'P')
-     {
-         postOrderTraversal(root);
-     }
+        }else if(choice == 'P')
+        {
+            postOrderTraversal(root);
+            printf("\n");
+        }
    }while(scanf("%*[\n]%c %6s",&choice, numberPlate)!=-1);
 
    // delete the tree
