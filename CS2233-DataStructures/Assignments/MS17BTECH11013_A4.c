@@ -15,16 +15,19 @@ struct listNode {
 
 };
 
+// front and rear pointers to point a queue
 struct listNode *front = NULL;
 struct listNode *rear = NULL;
 
+//  list to hold the neighbours of a given vertex
+// make a array of this list for all vertices that will give the adj list
 struct Graph
 {
     struct listNode *adjList;
 
 };
 
-
+// allocates a new node with the value val and next pointer to be null
 struct node *getNewNode(int val)
 {
     struct listNode *newNode = (struct node *)malloc(sizeof(struct listNode));
@@ -34,6 +37,8 @@ struct node *getNewNode(int val)
     return newNode;
 };
 
+
+// insert into the queue
 void enQueue(int k)
 {
     struct listNode* temp = getNewNode(k);
@@ -50,6 +55,7 @@ void enQueue(int k)
 
 }
 
+// get the front element of the  queue
 int getFront()
 {
     if(front != NULL)
@@ -58,6 +64,8 @@ int getFront()
     }
 }
 
+
+// remove the last element of the queue
 void deQueue()
 {
     if( front == NULL)
@@ -78,7 +86,7 @@ void deQueue()
 
 }
 
-
+// inserts the edge to the list in a sorted manner
 struct listNode* insertEdge(struct listNode* head, int value)
 {
     struct listNode *newNode;
@@ -108,26 +116,7 @@ struct listNode* insertEdge(struct listNode* head, int value)
     return head;
 }
 
-
-/*
-// function to free list after each line
-void FreeList(struct list* head){
-	struct list* temp;
-	while(head!=NULL){
-		temp = head;
-		head = head->next;
-		free(temp);
-	}head = NULL;
-}
-
-void free_graph(int n, struct list **graph){
-	int i=0;
-	for(i=0; i<n; i++) FreeList(graph[i]);
-	return;
-}
-*/
-
-
+// utility function to print the adj list
 void printGraph(struct listNode *head)
 {
     struct listNode *temp = head;
@@ -143,8 +132,12 @@ void printGraph(struct listNode *head)
 
 void bfs(struct Graph* adjlist[], int src, int s)
 {
+    // to make a note whether a given node is visited or not whose value can be 0 or 1
+    // 0 means not visited; 1 means visited
+
         int visited[s];
 
+    // iniitally all nodes are not visited
         for(int i =0; i < s; i++)
         {
             visited[i] = 0;
@@ -206,35 +199,22 @@ int main(){
 
 	 // Add the edge (startVertex, endVertex) to your graph here.
 
-	 if(startVertex != endVertex)
-     {
-
-        //myGraph[startVertex]->adjList = insertEdge(myGraph[startVertex]->adjList, endVertex);
-        // myGraph[endVertex]->adjList = insertEdge(myGraph[endVertex]->adjList, startVertex);
-
-       // printf(" ( %d , %d ) edge and ( %d , %d ) edge  added\n", startVertex, endVertex,endVertex,startVertex);
         adjList[startVertex] = insertEdge(adjList[startVertex], endVertex);
         adjList[endVertex] = insertEdge(adjList[endVertex], startVertex);
-
-
-     }
 
 	 if(delimiter == '\n') break; // Detecting end of line.
        }
      }
      else if(choice == 'B'){
        scanf("%d",&startVertex);
-       // Call BFS on your graph starting from startVertex here.
-        // bfs(adjList, startVertex ,numberOfVertices);
-
 
         for(int i = 0; i < numberOfVertices; i++)
         {
             myGraph[i] = adjList[i];
         }
-
-        // bfs(myGraph, startVertex, numberOfVertices);
+       // Call BFS on your graph starting from startVertex here.
         bfs(myGraph,  startVertex, numberOfVertices);
+
         printf("\n");
      }
    }
