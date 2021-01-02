@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
 	in_port_t servPort = atoi(argv[2]);
 
 	//Creat a socket
-	int sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	int sockfd = socket(AF_UNSPEC, SOCK_STREAM, IPPROTO_TCP);
 	if (sockfd < 0) {
 		perror("socket() failed");
 		exit(-1);
@@ -97,8 +97,8 @@ int main(int argc, char **argv) {
 	// Set the server address
 	struct sockaddr_in servAddr;
 	memset(&servAddr, 0, sizeof(servAddr));
-	servAddr.sin_family = AF_INET;
-	int err = inet_pton(AF_INET, servIP, &servAddr.sin_addr.s_addr);
+	servAddr.sin_family = AF_UNSPEC;
+	int err = inet_pton(AF_UNSPEC, servIP, &servAddr.sin_addr.s_addr);
 	if (err <= 0) {
 		perror("inet_pton() failed");
 		exit(-1);
